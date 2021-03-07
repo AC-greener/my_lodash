@@ -24,6 +24,7 @@ function chunk(array, size) {
 }
 //白银
 function chunk2(array, size) {
+  if(size <= 0) return []
   let resIndex = 0
   let index = 0 
   let length = array.length
@@ -34,7 +35,6 @@ function chunk2(array, size) {
   return res
 }
 
-console.table(chunk2(['a', 'b', 'c', 'd'], 2))
-console.table(chunk2(['a', 'b', 'c', 'd'], 3))
-console.table(chunk(['a', 'b', 'c', 'd'], 0))
-export default chunk
+// console.table(chunk2(['a', 'b', 'c', 'd'], 2))
+// console.table(chunk2(['a', 'b', 'c', 'd'], 3))
+// console.table(chunk(['a', 'b', 'c', 'd'], 0))
