@@ -42,7 +42,7 @@ function flatten(array) {
       res.push(item)
     }
   })
-  console.log(res)
+  // console.log(res)
   return res
 }
 function flatten(input, output = []) {
@@ -58,8 +58,63 @@ function flatten(input, output = []) {
   }
   return output
 }
-console.log(flatten([1, [2, [44]], [3, [[4]], 5, [[4]]]]))
+// console.log(flatten([1, [2, [44]], [3, [[4]], 5, [[4]]]]))
 
+// function without1(array, ...value) {
+//   value.forEach(item => {
+//     array = array.filter(v => v !== item)
+//   })
+//   return array
+// }
+function without(array, ...value) {
+  return array.filter(item => {
+    return !value.includes(item)
+  })
+}
 
+// console.log(without([1,2,3,4], 1,2,3))
+// console.log(without([1,2,3,4,1,2,1,3,4,5], 1,2,3))
 
+function union(...value) {
+  return Array.from(new Set(flatten(value)))
+}
+function union1(...value) {
+  return flatten(value).filter((e,i,arr)=>{
+    return  arr.indexOf(e) == i;
+})
+}
+// function union3(...value) {
+//   return [...new Set(flatten(value))]
+// }
+function union2(...value) {
+  const res = []
+  const x = flatten(value)
+  x.forEach(value => {
+    if(!res.includes(value)) {
+      res.push(value)
+    }
+  })
+  return res
+}
+// console.log(union([1, 2, 3], [101, 2, 1, 10], [2, 1]))
+// console.log(union1([1, 2, 3], [101, 2, 1, 10], [2, 1]))
+// console.log(union2([1, 2, 3], [101, 2, 1, 10], [2, 1]))
+
+//找出多个数组中的交集
+function intersection(array) {
+  const res = []
+  for(let i = 0; i < array.length; i++) {
+    let item = array[i]
+    if(res.includes(item)) continue
+    let j
+    for(j = 1; j < arguments.length; j++) {
+      if(!arguments[j].includes(item)) break
+    }
+    if(j === arguments.length) {
+      res.push(item)
+    }
+  }
+  return res
+}
+// console.log(intersection([1, 2, 3], [101, 2, 1, 10,3], [2, , 0,3]))
 
