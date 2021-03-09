@@ -15,4 +15,4 @@ function concat(array) {
   }
   return array
 }
-console.log(concat([1], 2, [3,4, [5, 6]], [[4]]))
+// console.log(concat([1], 2, [3,4, [5, 6]], [[4]]))
