@@ -1,3 +1,5 @@
+// Array API
+
 function first(array, n) {
   // console.log(array.slice(0, n) )
   return n === undefined ? array[0] :  array.slice(0, n) 
@@ -118,3 +120,101 @@ function intersection(array) {
 }
 // console.log(intersection([1, 2, 3], [101, 2, 1, 10,3], [2, , 0,3]))
 
+//已排序的数组去重
+function uniq(array, sorted = true) {
+  let result = []
+  let seen = undefined
+  for(let i = 0; i < array.length; i++) {
+    let value = array[i]
+    if(!i || seen !== value) {
+      result.push(value)
+    }
+    seen = value
+  }
+  return result
+}
+
+function zip(array) {
+  const result = []
+  array.forEach((item, index) => {
+    let v = []
+    for(let i = 0; i < arguments.length; i++) {
+      v.push(arguments[i][index])
+    }
+    result.push(v)
+  })
+  return result
+}
+function unzip(array) {
+  const result = []
+  array.forEach((item, index) => {
+    let v = []
+    for(let i = 0; i < item.length; i++) {
+      v.push(array[i][index])
+    }
+    result.push(v)
+  })
+  return result
+}
+
+// console.table(zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]))
+// console.log(unzip([["moe", 30, true], ["larry", 40, false], ["curly", 50, false]]))
+
+// _.chunk(array, length)
+// 将 array 分成多个数组，每个数组包含 length 或更少的项。
+
+function chunk(array, length) {
+  let l = length
+  let tmp = [],  result = []
+  for(let i = 0; i < array.length; i++) {
+    tmp.push(array[i])
+    if(--l === 0 || i === array.length - 1) {
+      result.push(tmp)
+      l = length
+      tmp = []
+    }
+  }
+}
+chunk([1,2,3,4,5,6,7,9], 2)
+
+function chunk2(array, length) {
+  let  result = []
+  for(let i = 0; i < array.length; i += length) {
+    result.push(array.slice(i, i + length))
+  }
+}
+chunk2([1,2,3,4,5,6,7,9], 2)
+
+// sortedIndex([10, 20, 30, 40, 50], 35) 使用二分查找确定 value 在 list 中的位置序号
+
+function sortedIndex(array, target) {
+  let low = 0, high = array.length
+  while(low < high) {
+    let mid = Math.floor((low + high) / 2)
+    if(array[mid] > target) {
+      high = mid
+    }  else if(array[mid] < target) {
+      low = mid + 1
+    } else {
+      return mid
+    }
+  }
+  return low
+}
+// console.log(sortedIndex([1,2,3,4,5,6], 3))
+// console.log(sortedIndex2([1,2,3,4,5,6], 3))
+function sortedIndex1(array, target) {
+  let low = 0, high = array.length
+  while(low < high) {
+    let mid = Math.ceil((low + high) / 2)
+    if(array[mid] > target) {
+      high = mid - 1
+    }  else if(array[mid] < target) {
+      low = mid
+    } else {
+      return mid
+    }
+  }
+  return low
+}
+sortedIndex1([1,2,3,4,5,6], 3)
